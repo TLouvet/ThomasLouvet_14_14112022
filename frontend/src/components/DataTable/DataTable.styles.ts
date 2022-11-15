@@ -1,9 +1,23 @@
 import styled from "@emotion/styled";
 
+export const StyledTableContainer = styled.div`
+  overflow: scroll; 
+  overflow-y: unset;
+  max-width: 100%;
+
+  @media screen and (min-width:1200px){
+    overflow: unset;
+  }
+  
+`;
+
 export const StyledFilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  left:0;
+  padding: 0 10px;
 `;
 
 export const StyledFilterSelect = styled.select`
@@ -76,6 +90,8 @@ export const StyledTableFooterContainer = styled.div`
   display: flex; 
   justify-content: space-between;
   align-items: baseline;
+  position: sticky;
+  left:0;
 `;
 
 export const StyledTBody = styled.tbody`

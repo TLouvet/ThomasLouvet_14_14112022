@@ -1,12 +1,11 @@
 import { useState, useRef, useReducer, useCallback } from "react";
 import { Datepicker } from "../../components/DatePicker";
-import { Input } from "../../components/Input";
+import { Input } from "../../ui/Input";
 import { Modal } from 'tlouvet-react-modal';
 import { Select } from "../../components/Select/Select"
 import { departments, states } from '../../constants';
 import { addEmployee } from "../../services/addEmployee";
 import { Button } from "../../ui/Button";
-import { FormGroup } from "../../ui/FormGroup";
 import { EmployeeActionKind, employeeReducer } from "../../reducer";
 import { initialState, init } from "../../reducer";
 import { Fieldset } from "../../ui/Fieldset";
@@ -45,30 +44,22 @@ export const HomePage = () => {
     <>
       <h1>Create Employee</h1>
       <form onSubmit={handleNewEmployeeSave}>
-        <FormGroup>
-          <Input type="text" label="First Name" value={user.firstname} onChange={handleDispatch} action={EmployeeActionKind.FIRSTNAME} />
-          <Input type="text" label="Last Name" value={user.lastname} onChange={handleDispatch} action={EmployeeActionKind.LASTNAME} />
-        </FormGroup>
-        <FormGroup>
-          <Datepicker label="Date of Birth" onChange={handleDispatch} action={EmployeeActionKind.BIRTH} />
-          <Datepicker label="Start Date" onChange={handleDispatch} action={EmployeeActionKind.START} />
-        </FormGroup>
+        <Input type="text" label="First Name" value={user.firstname} onChange={handleDispatch} action={EmployeeActionKind.FIRSTNAME} />
+        <Input type="text" label="Last Name" value={user.lastname} onChange={handleDispatch} action={EmployeeActionKind.LASTNAME} />
+        <Datepicker label="Date of Birth" onChange={handleDispatch} action={EmployeeActionKind.BIRTH} />
+        <Datepicker label="Start Date" onChange={handleDispatch} action={EmployeeActionKind.START} />
         <Fieldset>
           <legend>Address</legend>
-          <FormGroup>
-            <Input type='text' label="Street" value={user.street} onChange={handleDispatch} action={EmployeeActionKind.STREET} />
-            <Input type='text' label="City" value={user.city} onChange={handleDispatch} action={EmployeeActionKind.CITY} />
-          </FormGroup>
-          <FormGroup>
-            <Select
-              label='State'
-              values={states.map(st => st.abbreviation)}
-              options={states.map(st => st.name)}
-              onChange={handleDispatch}
-              action={EmployeeActionKind.STATE}
-            />
-            <Input type='number' label="Zip Code" value={user.zipCode} onChange={handleDispatch} action={EmployeeActionKind.ZIPCODE} />
-          </FormGroup>
+          <Input type='text' label="Street" value={user.street} onChange={handleDispatch} action={EmployeeActionKind.STREET} />
+          <Input type='text' label="City" value={user.city} onChange={handleDispatch} action={EmployeeActionKind.CITY} />
+          <Select
+            label='State'
+            values={states.map(st => st.abbreviation)}
+            options={states.map(st => st.name)}
+            onChange={handleDispatch}
+            action={EmployeeActionKind.STATE}
+          />
+          <Input type='number' label="Zip Code" value={user.zipCode} onChange={handleDispatch} action={EmployeeActionKind.ZIPCODE} />
         </Fieldset>
 
         <Select
@@ -78,7 +69,7 @@ export const HomePage = () => {
           action={EmployeeActionKind.DEPARTMENT}
           onChange={handleDispatch}
         />
-        <Button type="submit" content="Save" align="end" onClick={handleNewEmployeeSave} />
+        <Button type="button" content="Save" align="end" onClick={handleNewEmployeeSave} />
       </form>
 
       <Modal open={openModal} onClose={handleOpenModal} wrapperStyle={{ backgroundColor: 'black', color: 'white' }}>

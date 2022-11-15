@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
 
 export const StyledFieldset = styled.fieldset`
-  margin: 0 10px;
+  margin: 10px 0 30px 0;
 `;

@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { StyledTable } from "./DataTable.styles";
+import { StyledTable, StyledTableContainer } from "./DataTable.styles";
 import { DataTableBody } from "./DataTableBody";
 import { DataTableFilter } from "./DataTableFilter";
 import { DataTableFooter } from "./DataTableFooter"
@@ -21,6 +21,8 @@ export const DataTable = ({ columns, data, rowsPerPageOptions }: DataTableProps)
   const filteredData = useMemo(() => filter === "" ? data : filterData(filter, data), [filter, data]);
 
   const compare = (e1: any, e2: any) => String(e1).localeCompare(String(e2));
+
+  //Avoid recalculating if only changing page
   const sortedData = useMemo(
     () => filteredData.sort((a, b) => sortDirection === "up"
       ? compare(a[sortColumn], b[sortColumn]) :
@@ -46,7 +48,7 @@ export const DataTable = ({ columns, data, rowsPerPageOptions }: DataTableProps)
   return (
     <>
       {data.length > 0 && (
-        <div>
+        <StyledTableContainer>
           <DataTableFilter
             selectOptions={selectOptions}
             filter={filter}
@@ -76,7 +78,7 @@ export const DataTable = ({ columns, data, rowsPerPageOptions }: DataTableProps)
             totalEntries={data.length}
             setCurrentPage={setCurrentPage}
           />
-        </div>
+        </StyledTableContainer>
       )}
     </>
   )

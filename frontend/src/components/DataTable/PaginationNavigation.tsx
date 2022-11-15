@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 export const PaginationNumberNavigation = ({ maxPage, currentPage, setCurrentPage }: PaginationProps) => {
 
   const normalizedCurrentPage = currentPage + 1;
-  const arr = useMemo(formatArr, [maxPage, currentPage, normalizedCurrentPage]);
+  const pages = useMemo(formatArr, [maxPage, currentPage, normalizedCurrentPage]);
 
   if (maxPage <= 6) {
     return (
@@ -32,28 +32,28 @@ export const PaginationNumberNavigation = ({ maxPage, currentPage, setCurrentPag
     if (maxPage <= 6) {
       return [];
     }
-    const arr: any[] = [1]
+    const pages: any[] = [1]
     if (normalizedCurrentPage < 5 && maxPage > 6) {
-      arr.push(2, 3, 4, 5, '. . .', maxPage);
+      pages.push(2, 3, 4, 5, '. . .', maxPage);
     } else if (normalizedCurrentPage >= 5 && maxPage - currentPage <= 4) {
-      arr.push(". . .", maxPage - 4, maxPage - 3, maxPage - 2, maxPage - 1, maxPage);
+      pages.push(". . .", maxPage - 4, maxPage - 3, maxPage - 2, maxPage - 1, maxPage);
     } else if (normalizedCurrentPage >= 5 && maxPage - currentPage > 4) {
-      arr.push(". . .", normalizedCurrentPage - 1, normalizedCurrentPage, normalizedCurrentPage + 1, ". . .", maxPage);
+      pages.push(". . .", normalizedCurrentPage - 1, normalizedCurrentPage, normalizedCurrentPage + 1, ". . .", maxPage);
     }
-    return arr;
+    return pages;
   }
 
   return (
     <>
-      {arr.map((entry, i) => isNaN(Number(entry))
-        ? <span key={`dot-page-${i + 1}`}>{entry}</span>
+      {pages.map((page, i) => isNaN(Number(page))
+        ? <span key={`dot-page-${i + 1}`}>{page}</span>
         : (
           <StyledPaginationButton
-            selected={normalizedCurrentPage === entry ? "t" : "f"}
+            selected={normalizedCurrentPage === page ? "t" : "f"}
             key={`btn-page-${i + 1}`}
-            onClick={() => setCurrentPage(Number(entry) - 1)}
+            onClick={() => setCurrentPage(Number(page) - 1)}
           >
-            {entry}
+            {page}
           </StyledPaginationButton>
         )
       )}

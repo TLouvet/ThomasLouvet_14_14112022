@@ -1,6 +1,6 @@
 import React, { HTMLInputTypeAttribute, useId } from "react";
 import { EmployeeActionKind } from "../../reducer";
-import { StyledLabel } from "../Select/Select.styles";
+import { StyledLabel } from "../../components/Select/Select.styles";
 import { StyledContainer, StyledInput } from "./Input.styles";
 
 type InputProps = {
@@ -13,6 +13,7 @@ type InputProps = {
 
 export const Input = ({ type, label, value, onChange, action }: InputProps) => {
   const id = useId();
+
   return (
     <StyledContainer>
       <StyledLabel htmlFor={id}>{label} </StyledLabel>

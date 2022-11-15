@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useId } from "react"
 import { EmployeeActionKind } from "../../reducer";
-import { StyledContainer, StyledInput } from "../Input/Input.styles";
+import { StyledContainer, StyledInput } from "../../ui/Input/Input.styles";
 import { StyledLabel } from "../Select/Select.styles";
 import { StyledDatePickerContainer } from "./DatePicker.styles";
 import { DatePickerHeader } from "./DatePickerHeader";

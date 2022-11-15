@@ -25,14 +25,14 @@ export const DatePickerTable = ({ handleCellClick, selectedDay, selectedYear, se
         </tr>
       </thead>
       <tbody>
-        {displayedMonth.map((line, rowIndex) => (
+        {displayedMonth.map((row, rowIndex) => (
           <tr key={`picker-line-${rowIndex}`}>
-            {line.map((entry, colIndex) => (
+            {row.map((day, colIndex) => (
               <DatePickerCell
-                key={`day-${entry}-${colIndex}-${rowIndex}`}
-                value={entry}
+                key={`day-${day}-${colIndex}-${rowIndex}`}
+                value={day}
                 onClick={handleCellClick}
-                isCurrentMonthValue={isCurrentMonthValue(rowIndex, entry, displayedMonth)}
+                isCurrentMonthValue={isCurrentMonthValue(rowIndex, day, displayedMonth)}
                 selectedDay={selectedDay}
               />
             ))}
