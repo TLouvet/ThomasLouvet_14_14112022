@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { DAYS } from "../../constants"
 import { StyledPickerHeaderCell, StyledPickerTable } from "./DatePicker.styles"
 import { DatePickerCell } from "./DatePickerCell"
-import { getDaysMap, isCurrentMonthValue } from "./utils";
+import { getDaysMatrix, isCurrentMonthValue } from "./utils";
 
 type DatePickerTableProps = {
   handleCellClick: (day: number, isCurrentMonthValue: boolean) => void;
@@ -13,7 +13,7 @@ type DatePickerTableProps = {
 
 export const DatePickerTable = ({ handleCellClick, selectedDay, selectedYear, selectedMonth }: DatePickerTableProps) => {
 
-  const displayedMonth = useMemo(() => getDaysMap(selectedYear, selectedMonth), [selectedYear, selectedMonth]);
+  const displayedMonth = useMemo(() => getDaysMatrix(selectedYear, selectedMonth), [selectedYear, selectedMonth]);
 
   return (
     <StyledPickerTable>

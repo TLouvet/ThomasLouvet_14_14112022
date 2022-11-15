@@ -1,6 +1,10 @@
 import { MAX_PICKER_YEAR, MIN_PICKER_YEAR } from "../../constants";
 
-export function getDaysMap(selectedYear: number, selectedMonth: number) {
+/**
+ * Creates a matrix organized as a calendar where each row corresponds to one week
+ * starting on sunday and ending on saturday 
+ */
+export function getDaysMatrix(selectedYear: number, selectedMonth: number) {
   const lastDayOfMonth = new Date(selectedYear, selectedMonth + 1, 0);
   const previousMonthDays = getPreviousMonthDays(selectedYear, selectedMonth);
   const currentMonthDays = getCurrentMonthDays(lastDayOfMonth);
@@ -12,8 +16,6 @@ export function getDaysMap(selectedYear: number, selectedMonth: number) {
 /**
  * Return array containing days of the previous month that need to be included on the current month datepicker
  * It will fill part of the first line on the picker.
- * @param year - picker selected year
- * @param month  - picker selected month
  */
 function getPreviousMonthDays(year: number, month: number): number[] {
 
@@ -66,6 +68,9 @@ function getFormatedArray(flatArray: number[]): number[][] {
   )
 }
 
+/**
+ * Ensures month and day will be written with two digits, even if  < 10 
+ */
 export function formatDayAndMonth(date: string) {
   const splitDate = date.split('/');
   splitDate[0] = formatWithTwoDigits(splitDate[0]);
@@ -97,11 +102,7 @@ export function getMonthValue(selectedMonth: number, monthChange: number) {
   return selectedMonth + monthChange;
 }
 
-/**
- * Formate date 
- * @param date 
- * @returns 
- */
+
 export function isValidInputFormat(date: string) {
   const splitDate = date
     .split('/')
@@ -115,8 +116,6 @@ export function isValidInputFormat(date: string) {
   if (!validMonth || !validYear) {
     return false;
   }
-
-  // Ici on vérifie si c'est un jour valide, mais pour ça j'ai besoin que l'année soit valide + le mois 
 
   return true;
 }

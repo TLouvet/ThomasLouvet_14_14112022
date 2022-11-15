@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 export const PaginationNumberNavigation = ({ maxPage, currentPage, setCurrentPage }: PaginationProps) => {
 
   const normalizedCurrentPage = currentPage + 1;
-  const pages = useMemo(formatArr, [maxPage, currentPage, normalizedCurrentPage]);
+  const pages = useMemo(createPaginationValues, [maxPage, currentPage, normalizedCurrentPage]);
 
   if (maxPage <= 6) {
     return (
@@ -28,7 +28,7 @@ export const PaginationNumberNavigation = ({ maxPage, currentPage, setCurrentPag
    * Format available pagination buttons on page change when 
    * enough pages need to be rendered
    */
-  function formatArr() {
+  function createPaginationValues() {
     if (maxPage <= 6) {
       return [];
     }
