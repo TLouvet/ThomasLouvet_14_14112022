@@ -124,6 +124,7 @@ export const Datepicker = ({ label, onChange, action }: DatePickerProps) => {
       <StyledLabel htmlFor={id}>{label}</StyledLabel>
       <StyledInput
         id={id}
+        autoComplete="off"
         value={input}
         type="text"
         onInput={(e) => setInput((e.target as HTMLInputElement).value)}

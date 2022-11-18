@@ -16,12 +16,7 @@ type DatePickerHeaderProps = {
 
 export const DatePickerHeader = ({ focusToday, setSelectedMonth, selectedMonth, selectedYear, setSelectedYear }: DatePickerHeaderProps) => {
 
-  function handleHeaderMonthChange(value: number, type: "add" | "select" = "add") {
-    if (type === 'select') {
-      setSelectedMonth(value);
-      return;
-    }
-
+  function switchMonth(value: number) {
     const month = getMonthValue(selectedMonth, value);
     setSelectedMonth(month);
 
@@ -30,16 +25,15 @@ export const DatePickerHeader = ({ focusToday, setSelectedMonth, selectedMonth, 
     } else if (value === 1) {
       setSelectedYear(prev => selectedMonth === 11 ? prev + 1 : prev);
     }
-
   }
 
   return (
     <StyledHeaderContainer>
-      <DatePickerButton src={back} onClick={() => handleHeaderMonthChange(-1)} />
+      <DatePickerButton src={back} onClick={() => switchMonth(-1)} />
       <DatePickerButton src={home} onClick={focusToday} />
 
       <StyledSelect
-        onChange={(e) => handleHeaderMonthChange(MONTHS.findIndex(el => el === e.target.value, 'select'))}
+        onChange={(e) => setSelectedMonth(MONTHS.findIndex(el => el === e.target.value))}
         value={MONTHS[selectedMonth]}
       >
         {MONTHS.map(entry => <StyledOption key={entry} value={entry}>{entry}</StyledOption>)}
@@ -54,7 +48,7 @@ export const DatePickerHeader = ({ focusToday, setSelectedMonth, selectedMonth, 
         ))}
       </StyledSelect>
 
-      <DatePickerButton src={next} onClick={() => handleHeaderMonthChange(1)} />
+      <DatePickerButton src={next} onClick={() => switchMonth(1)} />
     </StyledHeaderContainer>
   )
 }
